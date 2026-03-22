@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-
-const API_BASE = 'http://localhost:8000/api';
+import { API_BASE } from '../config';
 
 export default function ConfirmEmail() {
   const { uid, token } = useParams();

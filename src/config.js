@@ -1,0 +1,1 @@
+export const API_BASE = 'https://blog-spot-d1fi.onrender.com/api';

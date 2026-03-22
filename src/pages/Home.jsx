@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 import PostList from '../components/PostList';
-
-const API_BASE = 'http://localhost:8000/api';
+import { API_BASE } from '../config';
 
 export default function Home({ token, user }) {
   const [posts, setPosts] = useState([]);

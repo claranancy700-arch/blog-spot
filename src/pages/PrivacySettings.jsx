@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getCSRFToken } from '../csrf';
-
-const API_BASE = 'http://localhost:8000/api';
+import { API_BASE } from '../config';
 
 export default function PrivacySettings({ user, setUser }) {
   const [profilePublic, setProfilePublic] = useState(true);

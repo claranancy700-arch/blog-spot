@@ -33,9 +33,8 @@ import PostCreator from './components/PostCreator';
 import LoadingScreen from './components/LoadingScreen';
 import Placeholder from './components/Placeholder';
 import { getCSRFToken } from './csrf';
+import { API_BASE } from './config';
 import './index.css';
-
-const API_BASE = 'http://localhost:8000/api';
 
 function AppContent() {
   const [user, setUser] = useState(null);

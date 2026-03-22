@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import PostGrid from '../components/PostGrid';
 import { getCSRFToken } from '../csrf';
-
-const API_BASE = 'http://localhost:8000/api';
+import { API_BASE } from '../config';
 
 export default function UserPage({ currentUser }) {
   const { username } = useParams();
