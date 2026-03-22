@@ -103,7 +103,6 @@ export default function ProfileForm({ user, setUser }) {
               </div>
             </div>
           </div>
-          
 
           <div className="form-section">
             <h3>About You</h3>
