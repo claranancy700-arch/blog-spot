@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Spot — Modern Artistic Icons</title>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@600&amp;display=swap');
+        
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: #0a0a0a;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Inter', system-ui, sans-serif;
+            color: #ddd;
+        }
+        
+        .nav-container {
+            background: rgba(255,255,255,0.06);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 24px 32px;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            display: flex;
+            gap: 32px;
+        }
+        
+        .action-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            color: #ddd;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .action-btn:hover {
+            color: #14f5b8;
+            transform: translateY(-6px) scale(1.12);
+        }
+        
+        .action-btn:active {
+            transform: scale(0.92);
+        }
+        
+        .action-btn svg {
+            width: 34px;
+            height: 34px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .action-btn span {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: -0.3px;
+            opacity: 0.85;
+        }
+        
+        .action-btn:hover span {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+<div class="nav-container">
+
+    <!-- HOME -->
+    <button class="action-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+            <!-- Artistic roof with soft curve -->
+            <path d="M3 9.8 L12 2.5 L21 9.8" />
+            <!-- House body with perspective -->
+            <path d="M5 10 L5 19.5 C5 20.88 6.12 22 7.5 22 L16.5 22 C17.88 22 19 20.88 19 19.5 L19 10" />
+            <!-- Modern door -->
+            <rect x="9.5" y="15" width="3" height="5" rx="0.6" fill="none" />
+            <!-- Artistic window with glow feel -->
+            <rect x="13.5" y="12.5" width="3.2" height="3" rx="0.5" fill="none" />
+        </svg>
+        <span>Home</span>
+    </button>
+
+    <!-- REEL -->
+    <button class="action-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+            <!-- Modern video frame with rounded corners -->
+            <rect x="3.5" y="4.5" width="17" height="15" rx="3.5" fill="none" />
+            <!-- Play triangle - bold & centered -->
+            <polygon points="10.5,8.5 17.5,12 10.5,15.5" fill="currentColor" stroke="none" />
+            <!-- Artistic film perforations (left side) -->
+            <rect x="4.8" y="7" width="1.1" height="2" rx="0.3" fill="currentColor" />
+            <rect x="4.8" y="10.8" width="1.1" height="2" rx="0.3" fill="currentColor" />
+            <rect x="4.8" y="14.6" width="1.1" height="2" rx="0.3" fill="currentColor" />
+        </svg>
+        <span>Reel</span>
+    </button>
+
+    <!-- MESSAGE -->
+    <button class="action-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+            <!-- Artistic chat bubble with elegant tail -->
+            <path d="M4.5 5.5 C4.5 3.6 6.1 2 8.1 2 L18.9 2 C20.9 2 22.5 3.6 22.5 5.5 L22.5 14.5 C22.5 16.4 20.9 18 18.9 18 L8.1 18 L3.5 22 L4.5 18 L4.5 5.5 Z" />
+            <!-- Modern message lines inside (different lengths for artistic feel) -->
+            <path d="M8.5 9 L15.5 9" stroke-width="1.6" />
+            <path d="M8.5 12 L13.5 12" stroke-width="1.6" />
+        </svg>
+        <span>Message</span>
+    </button>
+
+    <!-- PROFILE -->
+    <button class="action-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+            <!-- Artistic head (slightly oval + premium proportion) -->
+            <ellipse cx="12" cy="7.8" rx="4.1" ry="4.6" />
+            <!-- Elegant shoulders & body with soft curve -->
+            <path d="M5.8 18.5 C5.8 15.8 8.1 13.5 12 13.5 C15.9 13.5 18.2 15.8 18.2 18.5 L18.2 21 L5.8 21 Z" />
+        </svg>
+        <span>Profile</span>
+    </button>
+
+</div>
+
+<p style="margin-top: 50px; font-size: 14px; opacity: 0.6; max-width: 420px; text-align: center;">
+    Pure SVG • Modern artistic style • Feather-light • Scalable forever<br>
+    Hover for that premium “Blog Spot” pop ✨
+</p>
+
+</body>
+</html>

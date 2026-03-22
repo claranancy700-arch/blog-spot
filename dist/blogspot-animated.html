@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Spot — Animated Logo</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@900&amp;family=Montserrat:wght@100;900&amp;display=swap" rel="stylesheet">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@900&family=Montserrat:wght@100;900&display=swap');
+        
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: #0a0a0a;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: system-ui, sans-serif;
+            color: white;
+        }
+        
+        .logo-container {
+            position: relative;
+        }
+        
+        svg {
+            width: 620px;
+            max-width: 92vw;
+            filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.4));
+        }
+        
+        /* UNFOLDS FROM THE DOT → FULL LOGO */
+        .dot {
+            animation: logoPop 950ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            opacity: 0;
+        }
+        
+        .ogspot {
+            animation: logoPop 950ms cubic-bezier(0.34, 1.56, 0.64, 1) 280ms forwards;
+            opacity: 0;
+        }
+        
+        .name1 {
+            animation: logoPop 950ms cubic-bezier(0.34, 1.56, 0.64, 1) 520ms forwards;
+            opacity: 0;
+        }
+        
+        @keyframes logoPop {
+            0% {
+                opacity: 0;
+                transform: scale(0.4) translateY(45px);
+            }
+            55% {
+                opacity: 1;
+                transform: scale(1.12) translateY(-10px);
+            }
+            78% {
+                transform: scale(0.96) translateY(4px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+        
+        /* Hover delight */
+        svg:hover {
+            filter: drop-shadow(0 20px 45px rgba(255, 255, 255, 0.15));
+            transform: scale(1.03);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        .replay-btn {
+            margin-top: 40px;
+            padding: 14px 32px;
+            background: #ffffff;
+            color: #0a0a0a;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 8px 25px rgba(255,255,255,0.1);
+        }
+        
+        .replay-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(255,255,255,0.2);
+        }
+    </style>
+</head>
+<body>
+
+<div class="logo-container">
+    <svg xmlns="http://www.w3.org/2000/svg" width="620" height="220" viewBox="0 0 560 200" role="img" aria-label="Blog Spot logo">
+        <title>Blog Spot brand</title>
+        
+        <defs>
+            <filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%">
+                <feDropShadow dx="0" dy="8" stdDeviation="14" flood-color="#000" flood-opacity="0.35"/>
+            </filter>
+        </defs>
+
+        <!-- Logo group -->
+        <g id="logo-group" filter="url(#softShadow)" transform="translate(170,36)">
+            
+            <!-- "Bl" (bold) - appears last in the unfold -->
+            <text class="name1" x="0" y="70" 
+                  style="fill: rgb(255, 255, 255); 
+                         font-family: 'Inter', system-ui, -apple-system, sans-serif; 
+                         font-weight: 900; 
+                         font-size: 58px;
+                         letter-spacing: -2.5px;">
+                Bl
+            </text>
+            
+            <!-- "og Spot." split into two tspans so the dot can animate FIRST -->
+            <text class="name" x="60" y="70" 
+                  style="fill: rgba(255, 255, 255, 0.95); 
+                         font-family: 'Montserrat', system-ui, sans-serif; 
+                         font-weight: 100; 
+                         font-size: 58px;
+                         letter-spacing: -1.2px;">
+                <!-- "og Spot" part (appears second) -->
+                <tspan class="ogspot">og Spot</tspan>
+                <!-- "." dot part (appears FIRST - the starting point!) -->
+                <tspan class="dot">.</tspan>
+            </text>
+            
+        </g>
+    </svg>
+</div>
+
+<button class="replay-btn" onclick="replayAnimation()">↻ Replay Animation</button>
+
+<script>
+    function replayAnimation() {
+        const bl = document.querySelector('.name1');
+        const ogspot = document.querySelector('.ogspot');
+        const dot = document.querySelector('.dot');
+        
+        // Reset all
+        bl.style.animation = 'none';
+        ogspot.style.animation = 'none';
+        dot.style.animation = 'none';
+        
+        // Force reflow
+        void bl.offsetWidth;
+        void ogspot.offsetWidth;
+        void dot.offsetWidth;
+        
+        // Re-trigger with exact same timing (dot → og Spot → Bl)
+        dot.style.animation = 'logoPop 950ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards';
+        ogspot.style.animation = 'logoPop 950ms cubic-bezier(0.34, 1.56, 0.64, 1) 280ms forwards';
+        bl.style.animation = 'logoPop 950ms cubic-bezier(0.34, 1.56, 0.64, 1) 520ms forwards';
+    }
+    
+    // Auto-play on load
+    window.onload = () => {
+        setTimeout(() => {
+            document.querySelector('.dot').style.opacity = '1';
+        }, 120);
+    };
+</script>
+
+</body>
+</html>

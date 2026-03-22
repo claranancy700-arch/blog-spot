@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@900&family=Montserrat:wght@100;900&display=swap');
+
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #0a0a0a;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: system-ui, sans-serif;
+  color: white;
+  z-index: 9999;
+}
+
+.logo-container {
+  position: relative;
+}
+
+.logo-container svg {
+  width: 620px;
+  max-width: 92vw;
+  filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.4));
+}
+
+/* UNFOLDS FROM THE DOT → FULL LOGO */
+.dot {
+  animation: logoPop 950ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  opacity: 0;
+}
+
+.ogspot {
+  animation: logoPop 950ms cubic-bezier(0.34, 1.56, 0.64, 1) 280ms forwards;
+  opacity: 0;
+}
+
+.name1 {
+  animation: logoPop 950ms cubic-bezier(0.34, 1.56, 0.64, 1) 520ms forwards;
+  opacity: 0;
+}
+
+@keyframes logoPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.4) translateY(45px);
+  }
+  55% {
+    opacity: 1;
+    transform: scale(1.12) translateY(-10px);
+  }
+  78% {
+    transform: scale(0.96) translateY(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Hover delight */
+.logo-container svg:hover {
+  filter: drop-shadow(0 20px 45px rgba(255, 255, 255, 0.15));
+  transform: scale(1.03);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Text styling */
+.name1 {
+  fill: rgb(255, 255, 255);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-weight: 900;
+  font-size: 58px;
+  letter-spacing: -2.5px;
+}
+
+.name {
+  fill: rgba(255, 255, 255, 0.95);
+  font-family: 'Montserrat', system-ui, sans-serif;
+  font-weight: 100;
+  font-size: 58px;
+  letter-spacing: -1.2px;
+}
