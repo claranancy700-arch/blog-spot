@@ -6,6 +6,9 @@ class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='profile')
     bio = models.TextField(blank=True)
     avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
+    profile_public = models.BooleanField(default=True)
+    show_followers = models.BooleanField(default=True)
+    allow_comments = models.BooleanField(default=True)
     # additional social links could go here
 
     def __str__(self):
@@ -39,7 +42,8 @@ class Post(models.Model):
     video_file = models.FileField(upload_to='post_videos/', blank=True, null=True)
     tags = models.ManyToManyField(Tag, blank=True, related_name='posts')
     created = models.DateTimeField(auto_now_add=True)
-    published = models.BooleanField(default=False)
+    updated = models.DateTimeField(auto_now=True)
+    published = models.BooleanField(default=True)
 
     def __str__(self):
         return self.title

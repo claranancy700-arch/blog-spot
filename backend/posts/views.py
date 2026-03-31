@@ -18,6 +18,13 @@ class PostViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         qs = Post.objects.all().order_by('-created')
+        # only show published posts unless the requester is viewing their own
+        author_id = self.request.GET.get('author')
+        if self.request.user.is_authenticated and author_id and str(self.request.user.id) == str(author_id):
+            # author viewing own posts — show drafts too
+            pass
+        else:
+            qs = qs.filter(published=True)
         # search text
         search = self.request.GET.get('search')
         if search:
@@ -42,7 +49,6 @@ class PostViewSet(viewsets.ModelViewSet):
             followees = self.request.user.following.values_list('followee_id', flat=True)
             qs = qs.filter(author_id__in=followees)
         # filter by explicit author id
-        author_id = self.request.GET.get('author')
         if author_id:
             qs = qs.filter(author_id=author_id)
         return qs
@@ -133,6 +139,50 @@ def toggle_follow(request, username):
         obj.delete()
         return Response({'detail': 'unfollowed'})
     return Response({'detail': 'followed'})
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def user_followers(request, username):
+    try:
+        user = User.objects.get(username=username)
+    except User.DoesNotExist:
+        return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
+    followers = user.followers.select_related('follower__profile').all()
+    data = []
+    for f in followers:
+        u = f.follower
+        profile = getattr(u, 'profile', None)
+        avatar_url = ''
+        if profile and profile.avatar:
+            try:
+                avatar_url = request.build_absolute_uri(profile.avatar.url)
+            except Exception:
+                pass
+        data.append({'id': u.id, 'username': u.username, 'avatar_url': avatar_url})
+    return Response(data)
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def user_following(request, username):
+    try:
+        user = User.objects.get(username=username)
+    except User.DoesNotExist:
+        return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
+    following = user.following.select_related('followee__profile').all()
+    data = []
+    for f in following:
+        u = f.followee
+        profile = getattr(u, 'profile', None)
+        avatar_url = ''
+        if profile and profile.avatar:
+            try:
+                avatar_url = request.build_absolute_uri(profile.avatar.url)
+            except Exception:
+                pass
+        data.append({'id': u.id, 'username': u.username, 'avatar_url': avatar_url})
+    return Response(data)
 
 
 @api_view(['GET'])

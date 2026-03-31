@@ -46,9 +46,9 @@ class PostSerializer(serializers.ModelSerializer):
             'id', 'author', 'author_username', 'author_profile', 'title', 'body', 'body_html',
             'image', 'video_url', 'video_file', 'video', 'tags', 'tags_display',
             'likes_count', 'liked',
-            'created', 'published'
+            'created', 'updated', 'published'
         ]
-        read_only_fields = ['id', 'created', 'author_username', 'body_html', 'video', 'tags_display']
+        read_only_fields = ['id', 'created', 'updated', 'author_username', 'body_html', 'video', 'tags_display']
 
     def get_body_html(self, obj):
         import markdown as md

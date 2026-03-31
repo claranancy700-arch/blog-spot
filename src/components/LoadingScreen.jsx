@@ -55,7 +55,7 @@ const LoadingScreen = ({ onComplete }) => {
 
           <defs>
             <filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%">
-              <feDropShadow dx="0" dy="8" stdDeviation="14" flood-color="#000" flood-opacity="0.35"/>
+              <feDropShadow dx="0" dy="8" stdDeviation="14" floodColor="#000" floodOpacity="0.35"/>
             </filter>
           </defs>
 

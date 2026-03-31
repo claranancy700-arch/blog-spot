@@ -1,1 +1,1 @@
-export const API_BASE = 'https://blog-spot-d1fi.onrender.com/api';
+export const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:8000/api';

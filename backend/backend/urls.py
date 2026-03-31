@@ -6,6 +6,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
+from rest_framework import status
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate
 from posts.models import Profile
@@ -88,11 +89,42 @@ def user_detail(request):
     }
     return Response(resp)
 
+
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def delete_account(request):
+    """Permanently delete the authenticated user's account."""
+    from django.contrib.auth import logout
+    user = request.user
+    logout(request)
+    user.delete()
+    return Response({'detail': 'Account deleted'}, status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(['GET', 'POST'])
+@permission_classes([IsAuthenticated])
+def privacy_settings(request):
+    """Get or update privacy settings stored on the user's Profile."""
+    profile, _ = Profile.objects.get_or_create(user=request.user)
+    if request.method == 'POST':
+        profile.profile_public = request.data.get('profile_public', profile.profile_public)
+        profile.show_followers = request.data.get('show_followers', profile.show_followers)
+        profile.allow_comments = request.data.get('allow_comments', profile.allow_comments)
+        profile.save()
+    return Response({
+        'profile_public': profile.profile_public,
+        'show_followers': profile.show_followers,
+        'allow_comments': profile.allow_comments,
+    })
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('posts.urls')),
     path('api/login/', login_view),
     path('api/user/', user_detail),
+    path('api/user/delete/', delete_account),
+    path('api/user/privacy/', privacy_settings),
 ]
 
 # serve media during development
